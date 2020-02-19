@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ralfs Soundball</title>
+    <meta name="description" content="Ralfs Soundball">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link href="index.css" rel="stylesheet">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-randomizer-components@3.0.2/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://unpkg.com/aframe-entity-generator-component@3.0.1/dist/aframe-entity-generator-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-sprite-particles-component@^0.5.0/aframe-sprite-particles-component.js"></script>
+    <script src="https://rawgit.com/takahirox/aframe-rain/master/build/aframe-rain.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.x/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
+
+    <script src="./vendor/howler.min.js"></script>
+
+    <script src="./components/random-things.js"></script>
+    <script src="./components/play-tracks.js"></script>
+    <script src="./components/makeballs.js"></script>
+    <script src="./components/parkonclick.js"></script>
+    <script src="./components/win-lose.js"></script>
+    <script src="./components/displacement-shader.js"></script>
+    <script src="./components/utils.js"></script>
+
+    <script>
+      var last_sphere = 0; // last hit sphere
+      var bad_hits = -1; // count spheres hitting center
+      var track1; // audio tracks, loaded with howler
+      var track2;
+      var track3;
+      var track4;
+      var track5;
+      var track6;
+      var sound_bad_hit;
+      var wscream;
+    </script>
+  </head>
+  <body>
+    <a-scene loading-screen="dotsColor: red; backgroundColor: black" play-tracks makeballs win-lose>
+    <a-assets>
+      <a-asset-item id="milkyway" src="sky_pano_milkyway/scene.gltf"></a-asset-item>
+      <a-asset-item id="windance" src="sexy_dance/scene.gltf"></a-asset-item>
+      <a-asset-item id="toaster" src="toaster/scene.gltf"></a-asset-item>
+      <!-- mixin=group of attributes -->
+      <a-mixin id="light"
+        geometry="primitive: sphere; radius: 0.01"
+        material="color: #111; shader: flat"
+        light="color: #DDDDFF; distance: 120; intensity: 1; type: point">
+      </a-mixin>
+      <a-mixin id="torusKnot"
+        slurpshrink
+        animation__scale="property:scale; startEvents: slurp; dur: 300; to: 0 0 0"
+        random-torus-knot
+        random-material
+        random-position="min: -50 -40 -60; max: 60 60 40">
+      </a-mixin>
+      <a-mixin id="orbit"
+        animation="property: rotation; loop: true; to: 0 360 0; dur: 40000; easing: linear;">
+      </a-mixin>
+      <a-mixin id="randSphere"
+        slurpshrink
+        animation__scale="property:scale; startEvents: slurp; dur: 300; to: 0 0 0"
+        random-sphere
+        random-material
+        random-position="min: -50 -50 -60; max: 50 50 40">
+      </a-mixin>
+      <a-mixin id="font" text="font: fonts/Viga-Regular.json; shader: msdf; letterSpacing: 1">
+      </a-mixin>
+
+      <img id="logoImg" src="images/logoSB.png">
+      <img id="tBall_1" src="images/b1_1.jpg">
+      <img id="tBall_2" src="images/b2_2.jpg">
+      <img id="tBall_3" src="images/b3_3.jpg">
+      <img id="tBall_4" src="images/b4_4.jpg">
+      <img id="tBall_5" src="images/b1_5.jpg">
+      <img id="tBall_6" src="images/b3_6.jpg">
+
+      <img id="ich_m"   src="images/ich_matrix1024.jpg">
+      <!-- preload="true" should be changed to preload="auto"  -->
+      <audio id="sound_back" src="./audio/drone.mp3" preload="auto"></audio>
+      <audio id="sound_hit" src="./audio/hit1.mp3" preload="auto"></audio>
+      <audio id="sound_slurp" src="./audio/slurp.mp3" preload="auto"></audio>
+      <audio id="sound_hitfalse" src="./audio/no2.mp3" preload="auto"></audio>
+      <audio id="sound_badhit" src="./audio/bad_hit.mp3" preload="auto"></audio>
+      <audio id="pleasehit1" src="./audio/pleasehit1.mp3" preload="auto"></audio>
+      <audio id="pleasehit2" src="./audio/pleasehit2.mp3" preload="auto"></audio>
+      <audio id="pleasehit3" src="./audio/pleasehit3.mp3" preload="auto"></audio>
+      <audio id="pleasehit4" src="./audio/pleasehit4.mp3" preload="auto"></audio>
+      <audio id="pleasehit5" src="./audio/pleasehit5.mp3" preload="auto"></audio>
+      <audio id="pleasehit6" src="./audio/pleasehit6.mp3" preload="auto"></audio>
+      <audio id="soundgewitter" src="./audio/gewittersound.mp3" preload="auto"></audio>
+    </a-assets>
+    <a-entity id="introMusic" sound="src: #sound_back; loop: true; positional: false; autoplay: true" sound-fade></a-entity>
+    <a-sphere
+      id="mystery"
+      material="shader:displacement"
+      scale="0.6 0.6 0.6"
+      radius="0.2"
+      position="0 2.5 -6"
+      segments-height="32"
+      segments-width="32"
+      animation__scale="property: scale; direction: alternate-reverse; dur:5000; from: 1 1 1; to: 4 4 4; repeat: indefinite;"
+      >
+    </a-sphere>
+    <a-gltf-model src="#milkyway"></a-gltf-model>
+    <a-entity id="orbit-toaster" mixin="orbit" animation="dur: 10000;">
+      <a-entity id=“flyingtoaster”
+        scale="0.2 0.2 0.2"
+        position="0 5 -12"
+        gltf-model="#toaster"
+        animation__rot="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
+      ></a-entity>
+    </a-entity>
+    <a-entity animation="property: rotation; to: 60 360 0; dur: 20000; easing: linear; loop: true">
+      <a-entity mixin="light" position="60 0 0">
+      </a-entity>
+    </a-entity>
+    <!-- ambient light for dark areas -->
+    <a-light type="ambient" color="#445451"></a-light>
+    <a-image id="alogo" src="#logoImg" height="2.6" width="4.6" position="0 7 -10"></a-image>
+    <a-plane id="ichplane" src="#ich_m" height="4.9" width="4" position="0 0 -6" rotation="-90 0 0"></a-plane>
+    <a-entity id="counthits" position="0 2 -5"
+        mixin="font"
+        text="color: #4ef580; width: 0.8; wrapCount: 3; zOffset: 0.1; value: 70"
+      >
+    </a-entity>
+    <a-plane
+      id="instruction" height= "1.8" width="3.5" position="0 1.6 -3" color="#AAF"
+      sound="src:#sound_hit; autoplay: false; loop: false; volume: 1; on: click"
+      class="clickable"
+      startgame
+      mixin="font"
+      text="color: #4ef580; width:3.5; wrapCount: 35; xOffset: 0.1; zOffset: 0.01; value: Hit the balls in ascending order!\nSTART"
+      animation__scale="property: scale; from: 1 1 1; to: 0 0 0; dur: 1550; delay: 1.0; startEvents: startgame"
+      >
+    </a-plane>
+    <a-entity entity-generator="mixin: torusKnot; num: 8"></a-entity>
+    <a-entity entity-generator="mixin: randSphere; num: 6"></a-entity>
+    <a-entity
+      id="collectText"
+      mixin="font"
+      text="color: #4ef580; width: 3; wrapCount: 35; zOffset: 0.1; value: Collect spheres"
+      position="-1 -0.7 -3.2"
+      >
+    </a-entity>
+    <!-- Browser crashes exiting VR - BUG Browser/a-frame
+    <a-box id="refreshbox" class="clickable" visible="false"
+        position="1 -0.2 -3.2" color="#ccc"
+        depth="0.2" height="0.5" width="1.5"
+        sound="src:#sound_hit; poolSize: 1; autoplay: false; loop: false; volume: 1; on: click"
+        event-set__mouseenter="scale: 1.1 1.1 1.1"
+        event-set__mouseleave="scale: 1 1 1"
+        event_set__click
+        refresh
+        text="align: center; value: EXIT VR; color: green; width: 0.6; wrapCount:5; xOffset: 0.1; zOffset: 0.15"
+        >
+     </a-box> -->
+    <a-entity id="itsme" position="0 0 0">
+      <a-entity camera wasd-controls oculus-go-controls look-controls position="0 1.6 1">
+      </a-entity>
+      <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: .clickable; far: 28;" line="opacity:0.5; color: #6699ff" pointer></a-entity>
+      <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: .clickable; far: 28;" line="opacity:0.5; color: #6699ff" pointer></a-entity>
+    </a-entity>
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+html {
+  background: #000;
+}
+
+.a-loader-title {
+  animation: loaderTitle 1s infinite alternate;
+  color: rgba(0,0,0,0);
+  background: none;
+  height: 40.2vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 0;
+  background-size: contain;
+}
+
+@keyframes loaderTitle {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
