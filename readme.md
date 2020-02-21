@@ -10,7 +10,7 @@ A: Because i CAN ...!
 ## Technology
 
 Ralfs Soundball is built with [aframe](https://aframe.io) and [howler.js](https://https://howlerjs.com/).
-Tested with Oculus Go (best in Oculus Browser). Other Platforms actually not tested (needs a good controller)
+Tested with Oculus Go (best in Oculus Browser). Added cardboard support. Other Platforms actually not tested.
 
 ## Contributors
 
@@ -27,6 +27,7 @@ You can run a local server such as `http-server`. To install `http-server`, run 
 ## View/Play
 
 Visit https://viellieber.eu/RalfsSoundball/index.html
+Cardboard version https://viellieber.eu/RalfsSoundball/indexcb.html
 
 ## LICENSE
 
