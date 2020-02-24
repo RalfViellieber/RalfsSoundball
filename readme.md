@@ -14,20 +14,21 @@ Tested with Oculus Go (best in Oculus Browser). Added cardboard support. Other P
 
 ## Contributors
 
-* [@RalfViellieber](https://github.com/RalfViellieber) code/music/audio
+* [@RalfViellieber](https://github.com/RalfViellieber) code/music/audio [LICENSE](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 * [@mortaleiros](https://sketchfab.com/mortaleiros) for [3D model dancer](https://sketchfab.com/3d-models/sexy-dance-9445f66f061642d3b9a7e62263b1af5b) [LICENSE](https://creativecommons.org/licenses/by/4.0/)
 * [@hoschu](https://sketchfab.com/hoschu) for [3D model Toaster](https://sketchfab.com/3d-models/toaster-372be60a809e48f3a0059618cc09cddb) [LICENSE](https://creativecommons.org/licenses/by/4.0/)
 * [webgl-noise](https://github.com/ashima/webgl-noise) [LICENSE](https://github.com/ashima/webgl-noise/blob/master/LICENSE)
 
 ## Build
 
-No need to build - just clone.
+No need to build - just clone.  
 You can run a local server such as `http-server`. To install `http-server`, run `npm install -g http-server`. You can view the site in a browser with [inspector](https://github.com/aframevr/aframe-inspector).
 
 ## View/Play
 
-Visit https://viellieber.eu/RalfsSoundball/index.html
-Cardboard version https://viellieber.eu/RalfsSoundball/indexcb.html
+Visit for
+Oculus Go version https://ralfviellieber.github.io/RalfsSoundball/index.html  
+Cardboard version https://ralfviellieber.github.io/RalfsSoundball/indexcb.html
 
 ## LICENSE
 
