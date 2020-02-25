@@ -77,14 +77,14 @@ AFRAME.registerComponent('makeballs', {
       // console.log('p5: 0 3 -6');
 
       let wait_startdelay = startdelay + 100000; // wait until startgame event
-      let parkPosX = -3 + (a-1)*0.5;
+      let parkPosX = -2 + (a-1)*0.5;
       let ball = document.createElement('a-sphere');
       ball.setAttribute('id', `Ball_${a}`);
       ball.setAttribute('class', 'clickable');
       ball.setAttribute('src', `#tBall_${a}`);
       ball.setAttribute('scale', '0.8');
       ball.setAttribute('animation__rot', `property: rotation; to: 360 0 0; dur: ${rotDuration}; easing: linear; loop: true`);
-      ball.setAttribute('animation__pos2', `property: position; to: ${parkPosX} -1 -3.2; dur:1000; startEvents: park; autoplay: false;`);
+      ball.setAttribute('animation__pos2', `property: position; to: ${parkPosX} -0.5 -3.5; dur:1000; startEvents: park; autoplay: false;`);
       ball.setAttribute('animation__scale', 'property: scale; to: 0.21 0.21 0.21; dur:1000; startEvents: park; autoplay: false;');
       ball.setAttribute(`alongpath`, `curve: .track${a}; dur: ${pathDuration}; delay: ${wait_startdelay}; loop: true ;`);
       ball.addEventListener("movingended", () => {
@@ -126,7 +126,7 @@ AFRAME.registerComponent('makeballs', {
       parkinglodge.setAttribute('id', `park_${a}`);
       parkinglodge.setAttribute('radius', '0.2');
       parkinglodge.setAttribute('color', '#1d1e1f');
-      parkinglodge.setAttribute('position', `${parkPosX} -1 -3.2`);
+      parkinglodge.setAttribute('position', `${parkPosX} -0.5 -3.5`);
       scene.append(parkinglodge);
     }
   },
