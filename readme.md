@@ -1,16 +1,15 @@
 # Overview
 
-Ralfs Soundball is an web-based VR game.
+Ralfs Soundball is an web-based VR game.  
 Shoot the numbered balls in ascending order. Every ball will play an additional track of the song (guitar, drums, bass, ...)
 
-## FAQ
-Ralf - why did you ...?
-A: Because i CAN ...!
+![Ralfs Soundball](images/example_soundball.jpg?raw=true "Ralfs Soundball")
 
 ## Technology
 
-Ralfs Soundball is built with [aframe](https://aframe.io) and [howler.js](https://https://howlerjs.com/).
-Tested with Oculus Go (best in Oculus Browser). Added cardboard support. Other Platforms actually not tested.
+Ralfs Soundball is built with [aframe](https://aframe.io) and [howler.js](https://https://howlerjs.com/).   
+Tested with Oculus Go (best in Oculus Browser).  
+Added cardboard support. Other Platforms actually not tested.
 
 ## Contributors
 
@@ -26,7 +25,7 @@ You can run a local server such as `http-server`. To install `http-server`, run 
 
 ## View/Play
 
-Visit for
+Visit for  
 Oculus Go version https://ralfviellieber.github.io/RalfsSoundball/index.html  
 Cardboard version https://ralfviellieber.github.io/RalfsSoundball/indexcb.html
 
@@ -34,5 +33,5 @@ Cardboard version https://ralfviellieber.github.io/RalfsSoundball/indexcb.html
 
 Copyright (C) 2020 Ralf Viellieber (code and music)
 
-Licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+Licensed under Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)  
 https://creativecommons.org/licenses/by-nc-sa/4.0/
